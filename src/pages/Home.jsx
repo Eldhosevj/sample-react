@@ -1,61 +1,50 @@
 import React from 'react';
 import Layout from '../Layout/index';
-import {useOidc} from '@axa-fr/react-oidc'
 import axios from "axios"
+import { json } from 'react-router-dom';
 
 const Home = () => {
-const { login, logout, renewTokens, isAuthenticated } = useOidc();
 const fetchAPIs=async ()=>{
- 
-    try{  
-        const clientId = "fsams.ro";
-  
-        const clientSecret = "secret";
-  
-        const username = "FSTNRTESTUSER";
-  
-        const password = "P@ssw0rd!@#";
-  
-        const data = new URLSearchParams();
-  
-        data.append("grant_type", "password");
-  
-        data.append("client_id", clientId);
-  
-        data.append("client_secret", clientSecret);
-  
-        data.append("username", username);
-  
-        data.append("password", password);
-  
-        const response = await fetch("/connect/token", {
-          method: "POST",
-  
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-  
-          body: data.toString(),
-        });
-  
-        const tokenData = await response.json();
-  
-      alert(tokenData.access_token)
-  
-    }
+ const token=window.localStorage.getItem("token")
+ alert(token)
+    try{
+        const apiUrl = '/api/DocumentManagement/GetLast30DaysDocumentRequests';
+      
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          });
+        
+          const responseData = await response.json();
+          alert(JSON.stringify(responseData))
+         //res.send("verified")
+      }
     catch(error){
-    alert("error")
+alert()
     }
    
     
 }
 
+const fetchToken=()=>{
+    axios.get("http://localhost:3000/token").then((res)=>{
+
+if(res&&res.data&&res.data.token){
+   window.localStorage.setItem("token",res.data.token)
+}
+
+    }).catch(error=>{
+        alert("error")
+    })
+}
     return(<Layout>
        Home
-       <button onClick={()=>login("/admin")}>Login</button>
-       <button onClick={()=>logout()}>LogOut</button>
-       <button onClick={()=>renewTokens()}>renewTokens</button>
-       <button onClick={()=>fetchAPIs()}>FetchAPI </button>
+       
+       <button onClick={()=>fetchAPIs()}>GetLast30DaysDocumentRequests </button>
+       <button onClick={()=>{fetchToken()}}>FetchTocken</button>
 
     </Layout>);
 };
