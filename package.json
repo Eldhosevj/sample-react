@@ -1,7 +1,7 @@
 {
   "name": "react-oidc-example",
   "version": "0.1.0",
-  "proxy":"http://localhost:3000",
+  "proxy":"https://sts-lle.atsol.com",
   "homepage": "http://localhost:59984/",
   "private": true,
   "dependencies": {
