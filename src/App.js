@@ -1,7 +1,7 @@
 import './App.css';
 import RouteList from './Routes';
 import { BrowserRouter as Router } from "react-router-dom";
-
+import { OidcProvider } from "@axa-fr/react-oidc";
 // const configuration = {
 //   client_id: 'interactive.public.short',
 //   redirect_uri: window.location.origin + '/authentication/callback',
@@ -30,10 +30,11 @@ const configuration = {
 function App() {
   return (
  <div className='App'>
- 
+  <OidcProvider configuration={configuration}>
   <Router>
   < RouteList/>
   </Router>
+  </OidcProvider>
  </div>
   );
 }

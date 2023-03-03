@@ -1,7 +1,6 @@
 {
   "name": "react-oidc-example",
   "version": "0.1.0",
-  "proxy":"https://fs-tnr-tps-dev-api.azurewebsites.net",
   "homepage": "http://localhost:59984/",
   "private": true,
   "dependencies": {

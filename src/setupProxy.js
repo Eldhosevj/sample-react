@@ -2,9 +2,9 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app) {
   app.use(
-    '/api/DocumentManagement/GetLast30DaysDocumentRequests',
+    '/Account/Login',
     createProxyMiddleware({
-      target: 'https://fs-tnr-tps-dev-api.azurewebsites.net',
+      target: 'https://sts-lle.atsol.com',
       changeOrigin: true,
     })
   );

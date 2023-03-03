@@ -184,7 +184,7 @@ const getCurrentDatabasesTokenEndpoint = (database, url) => {
     return databases;
 };
 
-const openidWellknownUrlEndWith = '/.well-known/openid-configuration';
+const openidWellknownUrlEndWith = '/connect/authorize';
 const getCurrentDatabaseDomain = (database, url) => {
     if (url.endsWith(openidWellknownUrlEndWith)) {
         return null;
